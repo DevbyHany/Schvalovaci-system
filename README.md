@@ -37,8 +37,11 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 ### Filtrování – Zamítnuto
 ![Filtr zamítnuto](screenshots/filter-rejected.png)
 
-### Prázdný stav filtru
-![Prázdný stav](screenshots/empty-state.png)
+### Prázdný stav filtru 1
+![Prázdný stav](screenshots/empty-state-1.png)
+
+### Prázdný stav filtru 2
+![Prázdný stav](screenshots/empty-state-2.png)
 
 ### Vytvoření žádosti
 ![Vytvoření žádosti](screenshots/create-request.png)
