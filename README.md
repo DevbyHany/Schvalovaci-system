@@ -19,6 +19,12 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 ### Přihlášení – validace
 ![Přihlášení validace](screenshots/login-validation.png)
 
+### Přihlášení – validace (email)
+![Přihlášení validace](screenshots/login-email-validation.png)
+
+### Přihlášení – validace (heslo)
+![Přihlášení validace](screenshots/login-pass-validation.png)
+
 ### Registrace – validace
 ![Registrace validace](screenshots/register-validation.png)
 
@@ -46,6 +52,12 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 ### Vytvoření žádosti
 ![Vytvoření žádosti](screenshots/create-request.png)
 
+### Vytvoření žádosti - validace (velikost titulku)
+![Vytvoření žádosti - validace titulku](screenshots/create-request-validation-1.png)
+
+### Vytvoření žádosti - validace (velikost popisku)
+![Vytvoření žádosti - validace popisku](screenshots/create-request-validation-2.png)
+
 ### Detail žádosti (USER – bez tlačítek)
 ![Detail user](screenshots/detail-user.png)
 
@@ -57,6 +69,9 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 
 ### Toast – žádost zamítnuta
 ![Toast zamítnuto](screenshots/toast-rejected.png)
+
+### Toast – žádost vytvořena
+![Toast žádost vytvořena](screenshots/toast-request-created.png)
 
 ---
 
