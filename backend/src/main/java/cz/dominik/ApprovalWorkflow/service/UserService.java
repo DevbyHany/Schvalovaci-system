@@ -9,6 +9,9 @@ import cz.dominik.ApprovalWorkflow.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Servisní vrstva pro správu uživatelů.
+ */
 @Service
 public class UserService {
 
@@ -20,6 +23,12 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Zaregistruje nového uživatele s rolí USER.
+     * Heslo je uloženo v hashované podobě pomocí BCrypt.
+     *
+     * @throws InvalidRequestStateException pokud email již existuje
+     */
     public UserResponseDTO register(RegisterDTO dto) {
         if (userRepository.findByEmail(dto.getEmail()).isPresent()) {
             throw new InvalidRequestStateException("Email už je zaregistrován");

@@ -16,7 +16,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * Servisní vrstva pro správu schvalovacích žádostí.
+ * Obsahuje business logiku pro vytváření, schvalování a zamítání žádostí.
+ */
 @Service
 public class ApprovalService {
 
@@ -29,6 +32,9 @@ public class ApprovalService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Vytvoří novou žádost přihlášeného uživatele se statusem PENDING.
+     */
     public ApprovalRequestResponseDTO createRequest(String title, String description, User creator) {
         ApprovalRequest request = new ApprovalRequest(creator, title, description);
         request.setCreatedAt(LocalDateTime.now());
@@ -36,6 +42,13 @@ public class ApprovalService {
         return toDTO(approvalRequestRepository.save(request));
     }
 
+    /**
+     * Schválí žádost. Schvalovatel nesmí být tvůrce žádosti.
+     * Žádost musí být ve stavu PENDING.
+     *
+     * @throws InvalidRequestStateException pokud schvalovatel je zároveň tvůrce
+     * @throws InvalidRequestStateException pokud žádost již byla vyřízena
+     */
     public ApprovalRequestResponseDTO approveRequest(User approver, Long requestId) {
         ApprovalRequest request = approvalRequestRepository.findById(requestId)
                 .orElseThrow(() -> new ResourceNotFoundException("Žádost nenalezena"));
@@ -53,6 +66,12 @@ public class ApprovalService {
         return toDTO(approvalRequestRepository.save(request));
     }
 
+    /**
+     * Zamítne žádost. Stejná pravidla jako při schvalování.
+     *
+     * @throws InvalidRequestStateException pokud schvalovatel je zároveň tvůrce
+     * @throws InvalidRequestStateException pokud žádost již byla vyřízena
+     */
     public ApprovalRequestResponseDTO rejectRequest(User approver, Long requestId) {
         ApprovalRequest request = approvalRequestRepository.findById(requestId)
                 .orElseThrow(() -> new ResourceNotFoundException("Žádost nenalezena"));
@@ -70,6 +89,9 @@ public class ApprovalService {
         return toDTO(approvalRequestRepository.save(request));
     }
 
+    /**
+     * Převede entitu ApprovalRequest na DTO pro API odpověď.
+     */
     private ApprovalRequestResponseDTO toDTO(ApprovalRequest request) {
         UserResponseDTO createDTO = new UserResponseDTO(request.getCreator().getId(), request.getCreator().getName(),
                 request.getCreator().getEmail(), request.getCreator().getRole());
@@ -85,6 +107,10 @@ public class ApprovalService {
                 .orElseThrow(() -> new ResourceNotFoundException("Žádost nenalezena")));
     }
 
+    /**
+     * Vrátí seznam žádostí podle role uživatele.
+     * APPROVER a ADMIN vidí všechny žádosti, USER pouze své vlastní.
+     */
     public List<ApprovalRequestResponseDTO> getAllRequests(User user) {
         if (user.getRole() == Role.APPROVER || user.getRole() == Role.ADMIN) {
             return approvalRequestRepository.findAll()

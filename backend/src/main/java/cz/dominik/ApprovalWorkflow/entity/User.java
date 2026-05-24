@@ -9,6 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Entita reprezentující uživatele systému.
+ * Implementuje UserDetails pro integraci se Spring Security.
+ * Uživatel má jednu z rolí: USER, APPROVER, ADMIN.
+ */
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {

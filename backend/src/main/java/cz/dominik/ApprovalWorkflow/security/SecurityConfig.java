@@ -14,6 +14,10 @@ import org.springframework.web.cors.CorsConfiguration;
 
 import java.util.List;
 
+/**
+ * Konfigurace Spring Security.
+ * Používá HTTP Basic Auth a definuje přístupová pravidla pro jednotlivé endpointy.
+ */
 @Configuration
 public class SecurityConfig {
 

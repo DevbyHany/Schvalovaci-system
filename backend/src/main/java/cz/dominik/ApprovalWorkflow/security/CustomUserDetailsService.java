@@ -7,6 +7,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementace UserDetailsService pro Spring Security.
+ * Načítá uživatele z databáze podle emailu při přihlášení.
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
