@@ -90,11 +90,11 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 
 ## Testovací účty
 
-| Jméno   | Email                | Heslo      | Role     |
-|---------|----------------------|------------|----------|
-| Dominik | dominik@seznam.cz    | heslo123   | USER     |
-| Petr    | petr@seznam.cz       | heslo123   | APPROVER |
-| Filip   | filip@seznam.cz      | heslo123   | ADMIN    |
+| Jméno   | Email                | Heslo         | Role     |
+|---------|----------------------|---------------|----------|
+| Dominik | dominik@seznam.cz    | password123   | USER     |
+| Petr    | petr@seznam.cz       | password123   | APPROVER |
+| Filip   | filip@seznam.cz      | password123   | ADMIN    |
 
 ---
 
