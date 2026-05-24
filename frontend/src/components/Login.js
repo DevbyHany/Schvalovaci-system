@@ -1,0 +1,68 @@
+import { useState } from "react";
+
+function Login({ onLoginSuccess, onShowRegister }) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const handleLogin = async () => {
+        if (!email.trim()) {
+            setErrorMessage('Email nesmí být prázdný');
+            return;
+        }
+        if (!password.trim()) {
+            setErrorMessage('Heslo nesmí být prázdné');
+            return;
+        }
+        const response = await fetch('http://localhost:8080/api/requests', {
+            headers: {
+                'Authorization': 'Basic ' + btoa(email + ':' + password)
+            }
+        });
+        if (response.ok) {
+            localStorage.setItem('credentials', btoa(email + ':' + password))
+            onLoginSuccess(true);
+        } else {
+            if (response.status === 401) {
+                setErrorMessage('Špatné přihlašovací údaje');
+            } else {
+                const errorData = await response.json();
+                setErrorMessage(errorData.message || 'Chyba při přihlášení')
+            }
+
+        }
+    };
+
+    return (
+        <div className="login-container">
+            <div className="login-card">
+                <h2>Přihlášení</h2>
+                <div>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => { setEmail(e.target.value); setErrorMessage(''); }}
+                        onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
+                        className="login-input"
+                    />
+                    <input
+                        type="password"
+                        placeholder="Heslo"
+                        value={password}
+                        onChange={(e) => { setPassword(e.target.value); setErrorMessage(''); }}
+                        onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
+                        className="login-input"
+                    />
+                </div>
+                <button className="login-button" onClick={handleLogin}>Přihlásit se</button>
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                <p className="login-link">
+                    Nemáš účet? <span onClick={onShowRegister}>Zaregistruj se</span>
+                </p>
+            </div>
+        </div>
+    );
+}
+
+
+export default Login;
