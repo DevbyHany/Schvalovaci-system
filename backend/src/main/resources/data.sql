@@ -1,4 +1,4 @@
 INSERT IGNORE INTO users (name, email, password, role) VALUES
-('Dominik', 'dominik@seznam.cz', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LnQ5HTLW79a', 'USER'),
-('Petr', 'petr@seznam.cz', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LnQ5HTLW79a', 'APPROVER'),
-('Filip', 'filip@seznam.cz', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LnQ5HTLW79a', 'ADMIN');
+('Dominik', 'dominik@seznam.cz', '$2a$12$LL6jHTOW5XBRSqyC50gU6.ZUvn0NkzxIwo09eSiPnqJGHerErGsRW', 'USER'),
+('Petr', 'petr@seznam.cz', '$2a$12$LL6jHTOW5XBRSqyC50gU6.ZUvn0NkzxIwo09eSiPnqJGHerErGsRW', 'APPROVER'),
+('Filip', 'filip@seznam.cz', '$2a$12$LL6jHTOW5XBRSqyC50gU6.ZUvn0NkzxIwo09eSiPnqJGHerErGsRW', 'ADMIN');
