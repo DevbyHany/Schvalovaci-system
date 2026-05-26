@@ -5,23 +5,42 @@ import RequestDetail from "./RequestDetail";
 import { translateStatus, formatDate } from "../utils";
 import UserMenu from "./UserMenu";
 
-
+/**
+ * Hlavní komponenta pro zobrazení seznamu schvalovacích žádostí.
+ * Podporuje filtrování podle statusu a načítání aktuálního uživatele.
+ */
 function RequestList({ showToast }) {
+
+    // seznam všech žádostí
     const [requests, setRequests] = useState([]);
+
+    // zobrazení formuláře pro novou žádost
     const [showForm, setShowForm] = useState(false);
+
+    // přihlášený uživatel
     const [currentUser, setCurrentUser] = useState(null);
+
+    // vybraná žádost pro detail
     const [selectedRequest, setSelectedRequest] = useState(null)
+
+    // aktivní filtr statusu
     const [filter, setFilter] = useState('ALL')
+
+    // stav načítání
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         handleRequestList();
         fetchCurrentUser();
     }, []);
+
+    // Filtruje žádosti podle aktivního filtru
     const filteredRequests = requests.filter(r => {
         if (filter === 'ALL') return true;
         return r.requestStatus === filter;
     });
+
+    // Načte přihlášeného uživatele z backendu
     const fetchCurrentUser = async () => {
         const credentials = localStorage.getItem('credentials');
         const response = await fetch('http://localhost:8080/api/users/me', {
@@ -33,6 +52,8 @@ function RequestList({ showToast }) {
         console.log(data);
         setCurrentUser(data);
     }
+
+    // Načte seznam žádostí z backendu podle role uživatele
     const handleRequestList = async () => {
         const credentials = localStorage.getItem('credentials');
         const response = await fetch('http://localhost:8080/api/requests', {
@@ -45,6 +66,7 @@ function RequestList({ showToast }) {
         setRequests(data);
         setLoading(false);
     }
+
     return (
         <div className="page-wrapper">
             <div className="header">

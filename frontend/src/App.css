@@ -3,19 +3,28 @@ table {
     border-collapse: collapse;
     margin-top: 20px;
 }
-th, td {
+
+th,
+td {
     text-align: left;
     padding: 12px 16px;
     border-bottom: 1px solid #e0e0e0;
 }
+
 th {
     background-color: #dfdfdf;
     font-weight: 600;
     color: #616161;
     font-size: 14px;
 }
-tr:hover { background-color: #f5f5f5; }
-tbody tr { cursor: pointer; }
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+tbody tr {
+    cursor: pointer;
+}
 
 .status {
     padding: 4px 12px;
@@ -24,19 +33,35 @@ tbody tr { cursor: pointer; }
     font-weight: 500;
     display: inline-block;
 }
-.status-pending  { background-color: #e5edff; color: #5713f7; }
-.status-approved { background-color: #e6f4ea; color: #137333; }
-.status-rejected { background-color: #fce8e6; color: #c5221f; }
+
+.status-pending {
+    background-color: #e5edff;
+    color: #5713f7;
+}
+
+.status-approved {
+    background-color: #e6f4ea;
+    color: #137333;
+}
+
+.status-rejected {
+    background-color: #fce8e6;
+    color: #c5221f;
+}
 
 .modal-overlay {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
+
 .modal-card {
     background-color: white;
     border-radius: 12px;
@@ -48,6 +73,7 @@ tbody tr { cursor: pointer; }
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
     border: 1px solid #e5e7eb;
 }
+
 .modal-top {
     padding: 20px 24px;
     border-bottom: 1px solid #f3f4f6;
@@ -55,13 +81,18 @@ tbody tr { cursor: pointer; }
     justify-content: space-between;
     align-items: center;
 }
+
 .modal-top h2 {
     margin: 0;
     font-size: 16px;
     font-weight: 600;
     color: #111827;
 }
-.modal-body { padding: 20px 24px; }
+
+.modal-body {
+    padding: 20px 24px;
+}
+
 .modal-footer {
     display: flex;
     gap: 8px;
@@ -70,6 +101,7 @@ tbody tr { cursor: pointer; }
     border-radius: 0 0 12px 12px;
     background-color: #fafafa;
 }
+
 .modal-close {
     background: none;
     border: none;
@@ -84,13 +116,18 @@ tbody tr { cursor: pointer; }
     justify-content: center;
     padding: 0;
 }
-.modal-close:hover { background-color: #f3f4f6; color: #374151; }
+
+.modal-close:hover {
+    background-color: #f3f4f6;
+    color: #374151;
+}
 
 .detail-row {
     display: flex;
     flex-direction: column;
     margin-bottom: 16px;
 }
+
 .detail-label {
     font-size: 11px;
     font-weight: 600;
@@ -99,7 +136,11 @@ tbody tr { cursor: pointer; }
     letter-spacing: 0.6px;
     margin-bottom: 4px;
 }
-.detail-value { font-size: 14px; color: #374151; }
+
+.detail-value {
+    font-size: 14px;
+    color: #374151;
+}
 
 .inputTitle {
     width: 100%;
@@ -111,6 +152,7 @@ tbody tr { cursor: pointer; }
     box-sizing: border-box;
     font-size: 14px;
 }
+
 .inputDescription {
     width: 100%;
     height: 100px;
@@ -123,7 +165,11 @@ tbody tr { cursor: pointer; }
     font-family: inherit;
     font-size: 14px;
 }
-.inputTitle:focus, .inputDescription:focus { border-color: #5713f7; }
+
+.inputTitle:focus,
+.inputDescription:focus {
+    border-color: #5713f7;
+}
 
 .createButton {
     padding: 8px 16px;
@@ -135,7 +181,10 @@ tbody tr { cursor: pointer; }
     color: white;
     cursor: pointer;
 }
-.createButton:hover { background-color: #4509d4; }
+
+.createButton:hover {
+    background-color: #4509d4;
+}
 
 .detailApproveButton {
     flex: 1;
@@ -148,7 +197,10 @@ tbody tr { cursor: pointer; }
     cursor: pointer;
     font-size: 13px;
 }
-.detailApproveButton:hover { background-color: #dcfce7; }
+
+.detailApproveButton:hover {
+    background-color: #dcfce7;
+}
 
 .detailRejectButton {
     flex: 1;
@@ -161,7 +213,10 @@ tbody tr { cursor: pointer; }
     cursor: pointer;
     font-size: 13px;
 }
-.detailRejectButton:hover { background-color: #fee2e2; }
+
+.detailRejectButton:hover {
+    background-color: #fee2e2;
+}
 
 .header {
     display: flex;
@@ -171,9 +226,26 @@ tbody tr { cursor: pointer; }
     border-bottom: 1px solid #e0e0e0;
     background-color: white;
 }
-.header h2 { margin: 0; color: #1a1a1a; font-weight: 600; font-size: 24px; }
-.header-actions { display: flex; justify-content: flex-end; padding: 15px 0; }
-.header-title { display: flex; align-items: center; gap: 12px; }
+
+.header h2 {
+    margin: 0;
+    color: #1a1a1a;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.header-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 0;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .header-icon {
     width: 36px;
     height: 36px;
@@ -187,7 +259,11 @@ tbody tr { cursor: pointer; }
     font-weight: bold;
 }
 
-.user-menu { position: relative; display: inline-block; }
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
 .avatar {
     width: 40px;
     height: 40px;
@@ -202,7 +278,11 @@ tbody tr { cursor: pointer; }
     cursor: pointer;
     margin-right: 25px;
 }
-.avatar:hover { background-color: #acc3ff; }
+
+.avatar:hover {
+    background-color: #acc3ff;
+}
+
 .user-dropdown {
     position: absolute;
     top: 50px;
@@ -210,11 +290,12 @@ tbody tr { cursor: pointer; }
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     padding: 8px;
     min-width: 150px;
     z-index: 100;
 }
+
 .user-dropdown button {
     width: 100%;
     padding: 8px 12px;
@@ -224,7 +305,10 @@ tbody tr { cursor: pointer; }
     cursor: pointer;
     border-radius: 4px;
 }
-.user-dropdown button:hover { background-color: #f5f5f5; }
+
+.user-dropdown button:hover {
+    background-color: #f5f5f5;
+}
 
 .login-container {
     display: flex;
@@ -233,15 +317,22 @@ tbody tr { cursor: pointer; }
     min-height: 100vh;
     background-color: #f5f5f7;
 }
+
 .login-card {
     background-color: white;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     width: 100%;
     max-width: 400px;
 }
-.login-card h2 { margin: 0 0 24px 0; color: #1a1a1a; text-align: center; }
+
+.login-card h2 {
+    margin: 0 0 24px 0;
+    color: #1a1a1a;
+    text-align: center;
+}
+
 .login-input {
     width: 100%;
     padding: 13px;
@@ -252,7 +343,11 @@ tbody tr { cursor: pointer; }
     box-sizing: border-box;
     font-size: 14px;
 }
-.login-input:focus { border-color: #5713f7; }
+
+.login-input:focus {
+    border-color: #5713f7;
+}
+
 .login-button {
     width: 100%;
     padding: 12px;
@@ -265,10 +360,27 @@ tbody tr { cursor: pointer; }
     cursor: pointer;
     margin-top: 8px;
 }
-.login-button:hover { background-color: #4509d4; }
-.login-link { text-align: center; margin-top: 16px; color: #666; font-size: 14px; }
-.login-link span { color: #5713f7; cursor: pointer; font-weight: 600; }
-.login-link span:hover { text-decoration: underline; }
+
+.login-button:hover {
+    background-color: #4509d4;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 16px;
+    color: #666;
+    font-size: 14px;
+}
+
+.login-link span {
+    color: #5713f7;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.login-link span:hover {
+    text-decoration: underline;
+}
 
 .error-message {
     color: #c5221f;
@@ -279,6 +391,7 @@ tbody tr { cursor: pointer; }
     font-size: 14px;
     text-align: center;
 }
+
 .toast {
     position: fixed;
     top: 24px;
@@ -288,16 +401,30 @@ tbody tr { cursor: pointer; }
     border-radius: 8px;
     color: white;
     font-weight: 500;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     z-index: 9999;
     animation: slideIn 0.3s ease;
     white-space: nowrap;
 }
-.toast-success { background-color: #22c55e; }
-.toast-error   { background-color: #ef4444; }
+
+.toast-success {
+    background-color: #22c55e;
+}
+
+.toast-error {
+    background-color: #ef4444;
+}
+
 @keyframes slideIn {
-    from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
 }
 
 .page-wrapper {
@@ -315,7 +442,7 @@ tbody tr { cursor: pointer; }
     background-color: white;
     border-radius: 12px;
     border: 1px solid #e5e7eb;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
     overflow: hidden;
 }
 
@@ -344,21 +471,44 @@ tbody tr { cursor: pointer; }
     transition: all 0.15s;
 }
 
-.filter-btn:hover { background-color: #f9fafb; }
+.filter-btn:hover {
+    background-color: #f9fafb;
+}
 
-.filter-btn.active { border-color: #5713f7; background-color: #f0ebff; color: #5713f7; font-weight: 600; }
-.filter-btn.pending.active  { border-color: #5713f7; background-color: #e5edff; color: #5713f7; }
-.filter-btn.approved.active { border-color: #137333; background-color: #e6f4ea; color: #137333; }
-.filter-btn.rejected.active { border-color: #c5221f; background-color: #fce8e6; color: #c5221f; }
+.filter-btn.active {
+    border-color: #5713f7;
+    background-color: #f0ebff;
+    color: #5713f7;
+    font-weight: 600;
+}
+
+.filter-btn.pending.active {
+    border-color: #5713f7;
+    background-color: #e5edff;
+    color: #5713f7;
+}
+
+.filter-btn.approved.active {
+    border-color: #137333;
+    background-color: #e6f4ea;
+    color: #137333;
+}
+
+.filter-btn.rejected.active {
+    border-color: #c5221f;
+    background-color: #fce8e6;
+    color: #c5221f;
+}
 
 .filter-count {
-    background-color: rgba(0,0,0,0.07);
+    background-color: rgba(0, 0, 0, 0.07);
     border-radius: 10px;
     padding: 1px 7px;
     font-size: 12px;
 }
 
-.table-loading, .table-empty {
+.table-loading,
+.table-empty {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -368,8 +518,14 @@ tbody tr { cursor: pointer; }
     gap: 8px;
 }
 
-.table-empty p:first-child { font-size: 32px; }
-.table-empty p { margin: 0; font-size: 14px; }
+.table-empty p:first-child {
+    font-size: 32px;
+}
+
+.table-empty p {
+    margin: 0;
+    font-size: 14px;
+}
 
 .spinner {
     width: 28px;
@@ -381,5 +537,7 @@ tbody tr { cursor: pointer; }
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }

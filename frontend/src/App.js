@@ -5,10 +5,22 @@ import Register from "./components/Register";
 import './App.css';
 import Toast from "./components/Toast";
 
+/**
+ * Hlavní komponenta aplikace.
+ * Řídí přihlášení, registraci a zobrazení toast notifikací.
+ */
 function App() {
+
+  // Stav přihlášení uživatele
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  // Přepínač mezi přihlášením a registrací
   const [showRegister, setShowRegister] = useState(false)
+
+  // Aktuálně zobrazená toast notifikace
   const [toast, setToast] = useState(null);
+
+  // Zobrazí toast notifikaci s textem a typem (success/error)
   const showToast = (message, type = 'success') => {
     setToast({ message, type });
   };
@@ -30,7 +42,7 @@ function App() {
       ) : showRegister ? (
         <Register onShowLogin={() => setShowRegister(false)}
           onSuccess={() => setShowRegister(false)}
-          showToast={showToast} 
+          showToast={showToast}
         />
       ) : (
         <Login
