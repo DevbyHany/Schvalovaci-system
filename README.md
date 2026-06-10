@@ -107,9 +107,9 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 
 | Jméno   | Email                | Heslo         | Role     |
 |---------|----------------------|---------------|----------|
-| Dominik | dominik@seznam.cz    | password123   | USER     |
-| Petr    | petr@seznam.cz       | password123   | APPROVER |
-| Filip   | filip@seznam.cz      | password123   | ADMIN    |
+| Dominik | dominik@seznam.cz    | Heslo123      | USER     |
+| Petr    | petr@seznam.cz       | Heslo123      | APPROVER |
+| Filip   | filip@seznam.cz      | Heslo123      | ADMIN    |
 
 ---
 
