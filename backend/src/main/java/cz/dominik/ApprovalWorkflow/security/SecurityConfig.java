@@ -1,5 +1,6 @@
 package cz.dominik.ApprovalWorkflow.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,6 +22,10 @@ import java.util.List;
 @Configuration
 public class SecurityConfig {
 
+
+    @Value("${FRONTEND_URL:http://localhost:3000}")
+    private String frontendUrl;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -30,7 +35,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable()).cors(cors -> cors.configurationSource(request -> {
             var config = new CorsConfiguration();
-            config.setAllowedOrigins(List.of("http://localhost:3000"));
+            config.setAllowedOrigins(List.of("http://localhost:3000", frontendUrl));
             config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
             config.setAllowedHeaders(List.of("*"));
             config.setAllowCredentials(true);

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import API_BASE_URL from '../config';
 
 function CreateRequest({ onSuccess, onClose, currentUser, showToast }) {
     const [title, setTitle] = useState('');
@@ -7,7 +8,7 @@ function CreateRequest({ onSuccess, onClose, currentUser, showToast }) {
     const handleSubmit = async () => {
         console.log(title, description);
         const credentials = localStorage.getItem('credentials');
-        const response = await fetch('http://localhost:8080/api/requests', {
+        const response = await fetch(`${API_BASE_URL}/api/requests`, {
             method: 'POST',
             headers: {
                 'Authorization': 'Basic ' + credentials,

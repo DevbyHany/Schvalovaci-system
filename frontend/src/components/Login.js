@@ -1,4 +1,5 @@
 import { useState } from "react";
+import API_BASE_URL from '../config';
 
 function Login({ onLoginSuccess, onShowRegister }) {
     const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ function Login({ onLoginSuccess, onShowRegister }) {
             setErrorMessage('Heslo nesmí být prázdné');
             return;
         }
-        const response = await fetch('http://localhost:8080/api/requests', {
+        const response = await fetch(`${API_BASE_URL}/api/requests`, {
             headers: {
                 'Authorization': 'Basic ' + btoa(email + ':' + password)
             }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import API_BASE_URL from '../config';
 
 
 function Register({ onShowLogin, onSuccess, showToast }) {
@@ -8,7 +9,7 @@ function Register({ onShowLogin, onSuccess, showToast }) {
     const [errorMessages, setErrorMessages] = useState([]);
 
     const handleRegister = async () => {
-        const response = await fetch('http://localhost:8080/api/users/register', {
+        const response = await fetch(`${API_BASE_URL}/api/requests`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'

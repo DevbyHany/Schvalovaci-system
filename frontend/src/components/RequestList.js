@@ -43,7 +43,7 @@ function RequestList({ showToast }) {
     // Načte přihlášeného uživatele z backendu
     const fetchCurrentUser = async () => {
         const credentials = localStorage.getItem('credentials');
-        const response = await fetch('http://localhost:8080/api/users/me', {
+        const response = await fetch(`${API_BASE_URL}/api/users/me`, {
             headers: {
                 'Authorization': 'Basic ' + credentials
             }
@@ -56,7 +56,7 @@ function RequestList({ showToast }) {
     // Načte seznam žádostí z backendu podle role uživatele
     const handleRequestList = async () => {
         const credentials = localStorage.getItem('credentials');
-        const response = await fetch('http://localhost:8080/api/requests', {
+        const response = await fetch(`${API_BASE_URL}/api/requests`, {
             headers: {
                 'Authorization': 'Basic ' + (credentials)
             }

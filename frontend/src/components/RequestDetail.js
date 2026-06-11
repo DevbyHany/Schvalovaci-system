@@ -1,11 +1,12 @@
 import { translateStatus, formatDate } from "../utils";
 import { useState } from "react";
+import API_BASE_URL from '../config';
 
 function RequestDetail({ request, onClose, currentUser, showToast }) {
     const [errorMessage, setErrorMessage] = useState('');
     const handleReject = async () => {
         const credentials = localStorage.getItem('credentials');
-        const response = await fetch(`http://localhost:8080/api/requests/${request.id}/reject`, {
+        const response = await fetch(`${API_BASE_URL}/api/requests/${request.id}/reject`, {
             method: 'PUT',
             headers: {
                 'Authorization': 'Basic ' + credentials,
@@ -22,7 +23,7 @@ function RequestDetail({ request, onClose, currentUser, showToast }) {
     }
     const handleApprove = async () => {
         const credentials = localStorage.getItem('credentials');
-        const response = await fetch(`http://localhost:8080/api/requests/${request.id}/approve`, {
+        const response = await fetch(`${API_BASE_URL}/api/requests/${request.id}/approve`, {
             method: 'PUT',
             headers: {
                 'Authorization': 'Basic ' + credentials,
