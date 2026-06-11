@@ -4,6 +4,7 @@ import CreateRequest from "./CreateRequest";
 import RequestDetail from "./RequestDetail";
 import { translateStatus, formatDate } from "../utils";
 import UserMenu from "./UserMenu";
+import API_BASE_URL from '../config';
 
 /**
  * Hlavní komponenta pro zobrazení seznamu schvalovacích žádostí.
