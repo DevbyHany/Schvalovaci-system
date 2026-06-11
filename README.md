@@ -143,10 +143,3 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 
 **Frontend:** React, JavaScript, CSS
 
----
-
-## Další rozvoj
-- Unit a integrační testy
-- Stránkování a řazení žádostí
-- Email notifikace při změně statusu
-- Možnost přikládat přílohy k žádostem
