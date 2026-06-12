@@ -11,11 +11,12 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 
 ---
 
-## Testovací účty
+## Testovací účty (stejné heslo mají všichni stejné kvůli jednoduchosti testování aplikace)
 
 | Jméno   | Email                | Heslo         | Role     |
 |---------|----------------------|---------------|----------|
 | Dominik | dominik@seznam.cz    | heslo123      | USER     |
+| Tomáš   | tomas@seznam.cz      | heslo123      | USER     |
 | Petr    | petr@seznam.cz       | heslo123      | APPROVER |
 | Filip   | filip@seznam.cz      | heslo123      | ADMIN    |
 
