@@ -22,7 +22,9 @@ Heslo mají všichni stejné kvůli jednoduchosti testování aplikace
 | Petr    | petr@seznam.cz       | heslo123      | APPROVER |
 | Filip   | filip@seznam.cz      | heslo123      | ADMIN    |
 
-## 🌐 Live ukázka aplikace : https://schvalovaci-system.vercel.app/
+
+### 🌐 Live ukázka aplikace : https://schvalovaci-system.vercel.app/
+
 
 ## Ukázky obrazovek
 
