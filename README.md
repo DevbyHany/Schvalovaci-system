@@ -115,6 +115,8 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 
 ## Spuštění projektu
 
+🌐 Live ukázka : https://schvalovaci-system.vercel.app/
+
 ### Předpoklady
 - Java 21+
 - Maven
