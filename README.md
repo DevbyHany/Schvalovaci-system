@@ -11,7 +11,9 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 
 ---
 
-## Testovací účty (stejné heslo mají všichni stejné kvůli jednoduchosti testování aplikace)
+## Testovací účty
+
+stejné heslo mají všichni stejné kvůli jednoduchosti testování aplikace
 
 | Jméno   | Email                | Heslo         | Role     |
 |---------|----------------------|---------------|----------|
