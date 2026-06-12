@@ -11,6 +11,16 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 
 ---
 
+## Testovací účty
+
+| Jméno   | Email                | Heslo         | Role     |
+|---------|----------------------|---------------|----------|
+| Dominik | dominik@seznam.cz    | heslo123      | USER     |
+| Petr    | petr@seznam.cz       | heslo123      | APPROVER |
+| Filip   | filip@seznam.cz      | heslo123      | ADMIN    |
+
+## 🌐 Live ukázka aplikace : https://schvalovaci-system.vercel.app/
+
 ## Ukázky obrazovek
 
 ### Přihlášení
@@ -100,16 +110,6 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 - Globální zpracování výjimek
 - Role-based přístup k endpointům
 - MySQL databáze
-
----
-
-## Testovací účty
-
-| Jméno   | Email                | Heslo         | Role     |
-|---------|----------------------|---------------|----------|
-| Dominik | dominik@seznam.cz    | heslo123      | USER     |
-| Petr    | petr@seznam.cz       | heslo123      | APPROVER |
-| Filip   | filip@seznam.cz      | heslo123      | ADMIN    |
 
 ---
 
