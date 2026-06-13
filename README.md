@@ -11,6 +11,10 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 
 ---
 
+# 🌐 Live ukázka aplikace : https://schvalovaci-system.vercel.app/
+
+---
+
 ## Testovací účty
 
 Heslo mají všichni stejné kvůli jednoduchosti testování aplikace
@@ -22,9 +26,7 @@ Heslo mají všichni stejné kvůli jednoduchosti testování aplikace
 | Petr    | petr@seznam.cz       | heslo123      | APPROVER |
 | Filip   | filip@seznam.cz      | heslo123      | ADMIN    |
 
-
-# 🌐 Live ukázka aplikace : https://schvalovaci-system.vercel.app/
-
+---
 
 ## Ukázky obrazovek
 
