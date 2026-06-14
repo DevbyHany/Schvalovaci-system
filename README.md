@@ -156,7 +156,7 @@ Heslo mají všichni stejné kvůli jednoduchosti testování aplikace
 
 Projekt obsahuje unit testy pro servisní vrstvu.
 
-Testy lze spustit přímo v IntelliJ IDEA pravým klikem na třídu ApprovalServiceTest → Run.
+Testy lze spustit přímo v IntelliJ IDEA pravým klikem na třídu ApprovalServiceTest -> Run.
 
 Testované scénáře:
 - Vytvoření žádosti se statusem PENDING
