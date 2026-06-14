@@ -111,7 +111,7 @@ Heslo mají všichni stejné kvůli jednoduchosti testování aplikace
 - Nemůže vytvářet žádosti
 
 ### Backend
-- REST API s vrstvená architekturou
+- REST API s vrstvenou architekturou
 - Spring Security – HTTP Basic Auth, BCrypt hashování hesel
 - Validace vstupních dat (@NotBlank, @Email, @Size)
 - Globální zpracování výjimek
