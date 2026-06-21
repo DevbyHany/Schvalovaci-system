@@ -11,7 +11,17 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 
 ---
 
-# 🌐 Live ukázka aplikace : https://schvalovaci-system.vercel.app/
+# Live ukázka aplikace : https://schvalovaci-system.vercel.app/
+
+---
+
+## API dokumentace (Swagger)
+
+Interaktivní dokumentace všech endpointů s možností přímého testování v prohlížeči:
+
+🔗 https://schvalovaci-system-production.up.railway.app/swagger-ui/index.html
+
+Po kliknutí na **Authorize** lze API testovat přímo s testovacími účty uvedenými níže.
 
 ---
 
@@ -117,6 +127,7 @@ Heslo mají všichni stejné kvůli jednoduchosti testování aplikace
 - Globální zpracování výjimek
 - Role-based přístup k endpointům
 - MySQL databáze
+- Interaktivní API dokumentace (Swagger / OpenAPI)
 
 ---
 
