@@ -19,7 +19,7 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 
 Interaktivní dokumentace všech endpointů s možností přímého testování v prohlížeči:
 
-🔗 https://schvalovaci-system-production.up.railway.app/swagger-ui/index.html
+  https://schvalovaci-system-production.up.railway.app/swagger-ui/index.html
 
 Po kliknutí na **Authorize** lze API testovat přímo s testovacími účty uvedenými níže.
 
