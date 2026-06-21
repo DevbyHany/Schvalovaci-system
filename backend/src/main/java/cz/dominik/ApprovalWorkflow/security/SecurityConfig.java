@@ -40,7 +40,16 @@ public class SecurityConfig {
             config.setAllowedHeaders(List.of("*"));
             config.setAllowCredentials(true);
             return config;
-        })).authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, "/api/requests").hasAnyRole("USER", "APPROVER").requestMatchers(HttpMethod.GET, "/api/requests/**").authenticated().requestMatchers(HttpMethod.PUT, "/api/requests/*/approve").hasAnyRole("APPROVER", "ADMIN").requestMatchers(HttpMethod.PUT, "/api/requests/*/reject").hasAnyRole("APPROVER", "ADMIN").requestMatchers(HttpMethod.POST, "/api/users/register").permitAll().anyRequest().authenticated()).httpBasic(Customizer.withDefaults());
+        }))
+        .authorizeHttpRequests(auth -> auth
+                .requestMatchers(HttpMethod.POST, "/api/requests").hasAnyRole("USER", "APPROVER")
+                .requestMatchers(HttpMethod.GET, "/api/requests/**").authenticated()
+                .requestMatchers(HttpMethod.PUT, "/api/requests/*/approve").hasAnyRole("APPROVER", "ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/requests/*/reject").hasAnyRole("APPROVER", "ADMIN")
+                .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                .anyRequest().authenticated())
+                .httpBasic(Customizer.withDefaults());
         return http.build();
     }
 
