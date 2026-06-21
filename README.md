@@ -111,7 +111,7 @@ Heslo mají všichni stejné kvůli jednoduchosti testování aplikace
 - Nemůže vytvářet žádosti
 
 ### Backend
-- REST API s vrstvená architekturou
+- REST API s vrstvenou architekturou
 - Spring Security – HTTP Basic Auth, BCrypt hashování hesel
 - Validace vstupních dat (@NotBlank, @Email, @Size)
 - Globální zpracování výjimek
@@ -120,9 +120,7 @@ Heslo mají všichni stejné kvůli jednoduchosti testování aplikace
 
 ---
 
-## Spuštění projektu
-
-🌐 Live ukázka : https://schvalovaci-system.vercel.app/
+## Manuální spuštění projektu
 
 ### Předpoklady
 - Java 21+
@@ -151,4 +149,21 @@ Heslo mají všichni stejné kvůli jednoduchosti testování aplikace
 **Backend:** Java 21, Spring Boot, Spring Security, Spring Data JPA, Hibernate, MySQL, Maven
 
 **Frontend:** React, JavaScript, CSS
+
+---
+
+## Testy
+
+Projekt obsahuje unit testy pro servisní vrstvu.
+
+Testy lze spustit přímo v IntelliJ IDEA pravým klikem na třídu ApprovalServiceTest -> Run.
+
+Testované scénáře:
+- Vytvoření žádosti se statusem PENDING
+- Úspěšné schválení žádosti
+- Zamítnutí schválení vlastní žádosti
+- Zamítnutí schválení již schválené žádosti
+- Úspěšné zamítnutí žádosti
+- Zamítnutí již zamítnuté žádosti
+- Vyhození výjimky při nenalezení žádosti
 
