@@ -1,21 +1,28 @@
 package cz.dominik.ApprovalWorkflow.dto;
 
 import cz.dominik.ApprovalWorkflow.entity.RequestStatus;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDateTime;
 
 public class ApprovalRequestResponseDTO {
 
+    @Schema(example = "1")
     private Long id;
 
+    @Schema(example = "Žádost o nový notebook")
     private String title;
 
+    @Schema(example = "Potřebuji nový notebook pro práci na novém projektu")
     private String description;
 
+    @Schema(example = "2026-06-21T10:00:00")
     private LocalDateTime createdAt;
 
+    @Schema(example = "2026-06-21T10:00:00")
     private LocalDateTime updatedAt;
 
+    @Schema(example = "PENDING")
     private RequestStatus requestStatus;
 
     private UserResponseDTO creator;
