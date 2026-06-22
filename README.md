@@ -1,4 +1,8 @@
 # Schvalovací systém – Approval Workflow (Spring Boot + React)
+![Java](https://img.shields.io/badge/Java-21-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5-green)
+![Docker](https://img.shields.io/badge/Docker-ready-blue)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
 Fullstack webová aplikace pro správu schvalovacích žádostí.  
 Uživatelé vytvářejí žádosti, které schvalovatelé nebo administrátoři mohou schválit nebo zamítnout.
@@ -11,7 +15,18 @@ Projekt slouží jako demonstrační aplikace pro práci s:
 
 ---
 
-# Live ukázka aplikace : https://schvalovaci-system.vercel.app/
+## Spuštění přes Docker (doporučeno)
+
+Vyžaduje pouze Docker Desktop, žádnou lokální instalaci Java/Maven/MySQL.
+
+1. Naklonuj repozitář
+2. V kořenové složce spusť:
+   docker compose up --build
+3. Backend poběží na `http://localhost:8080`, MySQL na portu `3306`
+
+---
+
+## Live ukázka aplikace : https://schvalovaci-system.vercel.app/
 
 ---
 
@@ -157,7 +172,7 @@ Heslo mají všichni stejné kvůli jednoduchosti testování aplikace
 
 ## Použité technologie
 
-**Backend:** Java 21, Spring Boot, Spring Security, Spring Data JPA, Hibernate, MySQL, Maven
+**Backend:** Java 21, Spring Boot, Spring Security, Spring Data JPA, Hibernate, MySQL, Maven, Docker, Swagger/OpenAPI, JUnit 5, Mockito
 
 **Frontend:** React, JavaScript, CSS
 
