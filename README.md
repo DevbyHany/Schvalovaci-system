@@ -2,7 +2,6 @@
 ![Java](https://img.shields.io/badge/Java-21-orange)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5-green)
 ![Docker](https://img.shields.io/badge/Docker-ready-blue)
-![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
 Fullstack webová aplikace pro správu schvalovacích žádostí.  
 Uživatelé vytvářejí žádosti, které schvalovatelé nebo administrátoři mohou schválit nebo zamítnout.
