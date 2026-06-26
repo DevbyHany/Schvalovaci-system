@@ -4,7 +4,7 @@
 ![Docker](https://img.shields.io/badge/Docker-ready-blue)
 
 Fullstack webová aplikace pro správu schvalovacích žádostí.  
-Uživatelé vytvářejí žádosti, které schvalovatelé nebo administrátoři mohou schválit nebo zamítnout.
+Uživatelé vytvářejí žádosti, které schvalovatelé nebo administrátoři mohou schválit/zamítnout.
 
 Projekt slouží jako demonstrační aplikace pro práci s:
 - REST API a vrstvená architektura (Controller → Service → Repository)
