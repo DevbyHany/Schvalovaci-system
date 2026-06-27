@@ -75,8 +75,8 @@ function Login({onLoginSuccess, onShowRegister}) {
             >
                 {isLoading ? (
                     <>
+                        Přihlašuji
                         <span className="spinner"></span>
-                        Přihlašuji...
                     </>
                 ) : (
                     'Přihlásit se'
