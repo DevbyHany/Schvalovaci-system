@@ -25,8 +25,6 @@ function App() {
     setToast({ message, type });
   };
 
-  const [isLoading, setIsLoading] = useState(false)
-
 
   return (
     <div>
