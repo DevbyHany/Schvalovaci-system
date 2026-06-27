@@ -368,10 +368,15 @@ tbody tr {
     margin-top: 8px;
 }
 
-.login-button-content {
-    position: relative;
-    display: inline-flex;
+.login-button-text {
+    flex: 0 0 auto;
+}
+
+.login-button-icon {
+    width: 22px;
+    display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .login-button:hover {
@@ -396,13 +401,9 @@ tbody tr {
 }
 
 .login-spinner {
-    position: absolute;
-    left: -22px;
-    top: 50%;
-    transform: translateY(-50%);
     width: 14px;
     height: 14px;
-    border: 2px solid rgba(255,255,255,0.4);
+    border: 2px solid rgba(255, 255, 255, 0.4);
     border-top-color: #fff;
     border-radius: 50%;
     animation: spin 0.6s linear infinite;
