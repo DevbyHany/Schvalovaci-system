@@ -389,7 +389,7 @@ tbody tr {
     text-decoration: underline;
 }
 
-.spinner {
+.login-spinner {
     position: absolute;
     display: inline-block;
     width: 14px;
