@@ -391,7 +391,7 @@ tbody tr {
 
 .login-spinner {
     position: absolute;
-    left: 16px;
+    left: -22px;
     top: 50%;
     transform: translateY(-50%);
     width: 14px;

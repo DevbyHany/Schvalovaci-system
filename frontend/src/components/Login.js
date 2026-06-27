@@ -69,8 +69,10 @@ function Login({onLoginSuccess, onShowRegister}) {
                 />
             </div>
             <button className="login-button" onClick={handleLogin} disabled={isLoading}>
-                {isLoading && <span className="login-spinner"></span>}
-                <span>{isLoading ? 'Přihlašuji…' : 'Přihlásit se'}</span>
+                <span className="login-button-content">
+                    {isLoading && <span className="login-spinner"></span>}
+                    {isLoading ? 'Přihlašuji…' : 'Přihlásit se'}
+                </span>
             </button>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             <p className="login-link">
