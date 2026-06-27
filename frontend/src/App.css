@@ -368,6 +368,12 @@ tbody tr {
     margin-top: 8px;
 }
 
+.login-button-content {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
 .login-button:hover {
     background-color: #4509d4;
 }
