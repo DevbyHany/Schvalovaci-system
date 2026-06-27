@@ -349,8 +349,14 @@ tbody tr {
 }
 
 .login-button {
+    height: 44px;
     width: 100%;
+    white-space: nowrap;
     padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     background-color: #5713f7;
     color: white;
     border: none;
