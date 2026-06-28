@@ -120,7 +120,7 @@ Po kliknutí na **Authorize** ve Swaggeru lze API testovat přímo s těmito ú�
 ## Ukázky obrazovek
 
 ### Hlavní přehled žádostí (APPROVER)
-![Přehled žádostí](screenshots/dashboard-approver.png)
+![Přehled žádostí](screenshots/dashboard-approver1.png)
 
 ### Vytvoření žádosti
 ![Vytvoření žádosti](screenshots/create-request.png)
