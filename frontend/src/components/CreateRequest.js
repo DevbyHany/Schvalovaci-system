@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import API_BASE_URL from '../config';
 
 function CreateRequest({ onSuccess, onClose, currentUser, showToast }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [errorMessages, setErrorMessages] = useState([]);
+    const mouseDownOnOverlay = useRef (false);
+
     const handleSubmit = async () => {
         console.log(title, description);
         const credentials = localStorage.getItem('credentials');
@@ -28,11 +30,27 @@ function CreateRequest({ onSuccess, onClose, currentUser, showToast }) {
         }
     }
 
+    const handleOverlayMouseDown = (e) => {
+        mouseDownOnOverlay.current = e.targer === e.currentTarget;
+    };
+
+    const handleOverlayMouseUp = (e) => {
+        if (mouseDownOnOverlay.current && e.target === e.currentTarget) {
+            onClose();
+        }
+        mouseDownOnOverlay.current = false;
+    };
+
     return (
-        <div className="modal-overlay" onClick={onClose}>
+        <div
+            className="modal-overlay"
+            onMouseDown={handleOverlayMouseDown}
+            onMouseUp={handleOverlayMouseUp}
+        >
             <div className="modal-card" onClick={(e) => e.stopPropagation()}>
 
-                <div className="modal-top">
+                <div
+                    className="modal-top">
                     <h2>Vytvoření nové žádosti</h2>
                     <button className="modal-close" onClick={onClose}>×</button>
                 </div>
