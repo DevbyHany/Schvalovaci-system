@@ -4,6 +4,7 @@
 ![Docker](https://img.shields.io/badge/Docker-ready-blue)
 
 🔗 **Live demo:** https://schvalovaci-system.vercel.app/
+
 📄 **API dokumentace (Swagger):** https://schvalovaci-system-production.up.railway.app/swagger-ui/index.html
 
 ---
