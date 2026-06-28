@@ -3,52 +3,131 @@
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5-green)
 ![Docker](https://img.shields.io/badge/Docker-ready-blue)
 
-Fullstack webová aplikace pro správu schvalovacích žádostí.  
-Uživatelé vytvářejí žádosti, které schvalovatelé nebo administrátoři mohou schválit/zamítnout.
+🔗 **Live demo:** https://schvalovaci-system.vercel.app/
+📄 **API dokumentace (Swagger):** https://schvalovaci-system-production.up.railway.app/swagger-ui/index.html
 
-Projekt slouží jako demonstrační aplikace pro práci s:
-- REST API a vrstvená architektura (Controller → Service → Repository)
-- Spring Security s HTTP Basic Auth a rolemi
-- React frontend s komponentami, hooky a stavem
-- Validace vstupních dat na backendu i frontendu
+---
+ 
+## K čemu aplikace slouží
+ 
+Aplikace digitalizuje proces schvalování žádostí ve firmě. Zaměstnanec podá žádost (např. o nákup vybavení, dovolenou nebo technickou podporu), nadřízený (schvalovatel) nebo administrátor ji následně schválí nebo zamítne. Žádosti lze filtrovat podle stavu a podle role uživatele se liší, co smí v aplikaci vidět a dělat.
 
 ---
 
-## Spuštění přes Docker (doporučeno)
+## Co aplikace umí
 
+### Uživatel (USER)
+- Registrace a přihlášení
+- Vytvoření nové žádosti s názvem a popisem
+- Zobrazení pouze vlastních žádostí
+- Filtrování žádostí podle statusu
+  
+### Schvalovatel (APPROVER)
+- Zobrazení všech žádostí v systému
+- Schválení nebo zamítnutí cizích žádostí
+- Nelze schválit vlastní žádost
+  
+### Administrátor (ADMIN)
+- Zobrazení všech žádostí
+- Schválení nebo zamítnutí žádostí
+- Nemůže vytvářet žádosti
+  
+### Backend
+- REST API s vrstvenou architekturou (Controller → Service → Repository)
+- Spring Security – HTTP Basic Auth, BCrypt hashování hesel
+- Validace vstupních dat (@NotBlank, @Email, @Size)
+- Globální zpracování výjimek
+- Role-based přístup k endpointům
+- MySQL databáze
+- Interaktivní API dokumentace (Swagger / OpenAPI)
+
+---
+ 
+## Použité technologie
+ 
+**Backend:** Java 21, Spring Boot, Spring Security, Spring Data JPA, Hibernate, MySQL, Maven, Docker, Swagger/OpenAPI, JUnit 5, Mockito
+ 
+**Frontend:** React, JavaScript, CSS
+
+---
+ 
+## Jak to spustit
+ 
+### Přes Docker (doporučeno)
+ 
 Vyžaduje pouze Docker Desktop, žádnou lokální instalaci Java/Maven/MySQL.
-
-1. Naklonuj repozitář
+ 
+1. Naklonuj nebo stáhni repozitář:
+```
+   git clone https://github.com/DevbyHany/Schvalovaci-system.git
+```
 2. V kořenové složce spusť:
+```
    docker compose up --build
+```
 3. Backend poběží na `http://localhost:8080`, MySQL na portu `3306`
+### Manuální spuštění (pro vývoj)
+ 
+#### Backend
+ 
+Vyžaduje Java 21+ a běžící MySQL databázi. Maven není potřeba mít nainstalovaný globálně – projekt obsahuje Maven Wrapper (`mvnw`).
+ 
+1. Naklonuj nebo stáhni repozitář
+2. V `backend/src/main/resources/application.properties` nastav připojení k MySQL databázi
+3. Ve složce `backend` spusť:
+```
+   ./mvnw spring-boot:run
+```
+   Na Windows: `mvnw.cmd spring-boot:run`
+ 
+   Pokud na Linuxu/macOS `mvnw` nemá oprávnění k běhu, nastav ho takto:
+```
+   chmod +x mvnw
+```
+4. Backend běží na `http://localhost:8080`
+   
+#### Testy
+ 
+```
+./mvnw test
+```
 
+#### Frontend
+ 
+1. Otevři terminál ve složce `frontend`
+2. `npm install`
+3. `npm start`
+4. Aplikace běží na `http://localhost:3000`
+   
 ---
-
-## Live ukázka aplikace : https://schvalovaci-system.vercel.app/
-
----
-
-## API dokumentace (Swagger)
-
-Interaktivní dokumentace všech endpointů s možností přímého testování v prohlížeči:
-
-  https://schvalovaci-system-production.up.railway.app/swagger-ui/index.html
-
-Po kliknutí na **Authorize** lze API testovat přímo s testovacími účty uvedenými níže.
+ 
+## Testovací účty
+ 
+Heslo mají všichni stejné kvůli jednoduchosti testování aplikace.
+ 
+| Jméno   | Email             | Heslo    | Role     |
+|---------|--------------------|----------|----------|
+| Dominik | dominik@seznam.cz | heslo123 | USER     |
+| Tomáš   | tomas@seznam.cz   | heslo123 | USER     |
+| Petr    | petr@seznam.cz    | heslo123 | APPROVER |
+| Filip   | filip@seznam.cz   | heslo123 | ADMIN    |
+ 
+Po kliknutí na **Authorize** ve Swaggeru lze API testovat přímo s těmito účty.
 
 ---
 
 ## Testovací účty
-
-Heslo mají všichni stejné kvůli jednoduchosti testování aplikace
-
-| Jméno   | Email                | Heslo         | Role     |
-|---------|----------------------|---------------|----------|
-| Dominik | dominik@seznam.cz    | heslo123      | USER     |
-| Tomáš   | tomas@seznam.cz      | heslo123      | USER     |
-| Petr    | petr@seznam.cz       | heslo123      | APPROVER |
-| Filip   | filip@seznam.cz      | heslo123      | ADMIN    |
+ 
+Heslo mají všichni stejné kvůli jednoduchosti testování aplikace.
+ 
+| Jméno   | Email             | Heslo    | Role     |
+|---------|--------------------|----------|----------|
+| Dominik | dominik@seznam.cz | heslo123 | USER     |
+| Tomáš   | tomas@seznam.cz   | heslo123 | USER     |
+| Petr    | petr@seznam.cz    | heslo123 | APPROVER |
+| Filip   | filip@seznam.cz   | heslo123 | ADMIN    |
+ 
+Po kliknutí na **Authorize** ve Swaggeru lze API testovat přímo s těmito účty.
 
 ---
 
@@ -116,73 +195,12 @@ Heslo mají všichni stejné kvůli jednoduchosti testování aplikace
 
 ---
 
-## Funkce
-
-### Uživatel (USER)
-- Registrace a přihlášení
-- Vytvoření nové žádosti s názvem a popisem
-- Zobrazení pouze vlastních žádostí
-- Filtrování žádostí podle statusu
-
-### Schvalovatel (APPROVER)
-- Zobrazení všech žádostí v systému
-- Schválení nebo zamítnutí cizích žádostí
-- Nelze schválit vlastní žádost
-
-### Administrátor (ADMIN)
-- Zobrazení všech žádostí
-- Schválení nebo zamítnutí žádostí
-- Nemůže vytvářet žádosti
-
-### Backend
-- REST API s vrstvenou architekturou
-- Spring Security – HTTP Basic Auth, BCrypt hashování hesel
-- Validace vstupních dat (@NotBlank, @Email, @Size)
-- Globální zpracování výjimek
-- Role-based přístup k endpointům
-- MySQL databáze
-- Interaktivní API dokumentace (Swagger / OpenAPI)
-
----
-
-## Manuální spuštění projektu
-
-### Předpoklady
-- Java 21+
-- Maven
-- Node.js + npm
-- MySQL
-
-### Spuštění backendu
-1. Klikni na zelené tlačítko **Code** na GitHubu
-2. Zvol **Download ZIP** a rozbal do složky
-3. Otevři složku `backend` v IntelliJ IDEA
-4. V `application.properties` nastav připojení k MySQL databázi
-5. Najdi třídu `ApprovalWorkflowApplication` a spusť aplikaci
-6. Backend běží na `http://localhost:8080`
-
-### Spuštění frontendu
-1. Otevři terminál ve složce `frontend`
-2. Zadej `npm install`
-3. Zadej `npm start`
-4. Aplikace běží na `http://localhost:3000`
-
----
-
-## Použité technologie
-
-**Backend:** Java 21, Spring Boot, Spring Security, Spring Data JPA, Hibernate, MySQL, Maven, Docker, Swagger/OpenAPI, JUnit 5, Mockito
-
-**Frontend:** React, JavaScript, CSS
-
----
-
 ## Testy
-
+ 
 Projekt obsahuje unit testy pro servisní vrstvu.
-
-Testy lze spustit přímo v IntelliJ IDEA pravým klikem na třídu ApprovalServiceTest -> Run.
-
+ 
+Testy lze spustit přímo v IntelliJ IDEA pravým klikem na třídu `ApprovalServiceTest` → Run, nebo přes `./mvnw test` (viz výše).
+ 
 Testované scénáře:
 - Vytvoření žádosti se statusem PENDING
 - Úspěšné schválení žádosti
@@ -191,4 +209,3 @@ Testované scénáře:
 - Úspěšné zamítnutí žádosti
 - Zamítnutí již zamítnuté žádosti
 - Vyhození výjimky při nenalezení žádosti
-
