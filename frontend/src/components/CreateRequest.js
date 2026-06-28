@@ -9,11 +9,11 @@ function CreateRequest({ onSuccess, onClose, currentUser, showToast }) {
 
     const handleSubmit = async () => {
         console.log(title, description);
-        const credentials = localStorage.getItem('credentials');
+        const credentials = localStorage.getItem('token');
         const response = await fetch(`${API_BASE_URL}/api/requests`, {
             method: 'POST',
             headers: {
-                'Authorization': 'Basic ' + credentials,
+                'Authorization': 'Bearer ' + credentials,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ title, description })
@@ -31,7 +31,7 @@ function CreateRequest({ onSuccess, onClose, currentUser, showToast }) {
     }
 
     const handleOverlayMouseDown = (e) => {
-        mouseDownOnOverlay.current = e.targer === e.currentTarget;
+        mouseDownOnOverlay.current = e.target === e.currentTarget;
     };
 
     const handleOverlayMouseUp = (e) => {

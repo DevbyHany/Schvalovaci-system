@@ -9,7 +9,7 @@ function Register({ onShowLogin, onSuccess, showToast }) {
     const [errorMessages, setErrorMessages] = useState([]);
 
     const handleRegister = async () => {
-        const response = await fetch(`${API_BASE_URL}/api/requests`, {
+        const response = await fetch(`${API_BASE_URL}/api/users/register`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'

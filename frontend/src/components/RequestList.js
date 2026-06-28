@@ -43,10 +43,10 @@ function RequestList({ showToast }) {
 
     // Načte přihlášeného uživatele z backendu
     const fetchCurrentUser = async () => {
-        const credentials = localStorage.getItem('credentials');
+        const credentials = localStorage.getItem('token');
         const response = await fetch(`${API_BASE_URL}/api/users/me`, {
             headers: {
-                'Authorization': 'Basic ' + credentials
+                'Authorization': 'Bearer ' + credentials
             }
         });
         const data = await response.json();
@@ -56,10 +56,10 @@ function RequestList({ showToast }) {
 
     // Načte seznam žádostí z backendu podle role uživatele
     const handleRequestList = async () => {
-        const credentials = localStorage.getItem('credentials');
+        const credentials = localStorage.getItem('token');
         const response = await fetch(`${API_BASE_URL}/api/requests`, {
             headers: {
-                'Authorization': 'Basic ' + (credentials)
+                'Authorization': 'Bearer ' + credentials
             }
         });
         const data = await response.json();
@@ -84,7 +84,7 @@ function RequestList({ showToast }) {
                     <UserMenu
                         currentUser={currentUser}
                         onLogout={() => {
-                            localStorage.removeItem('credentials');
+                            localStorage.removeItem('token');
                             window.location.reload();
                         }}
                     />

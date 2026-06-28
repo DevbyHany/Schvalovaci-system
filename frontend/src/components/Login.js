@@ -17,13 +17,17 @@ function Login({onLoginSuccess, onShowRegister}) {
         }
         setIsLoading(true);
         try {
-            const response = await fetch(`${API_BASE_URL}/api/requests`, {
+            const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+                method: 'POST',
                 headers: {
-                    'Authorization': 'Basic ' + btoa(email + ':' + password)
-                }
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
             });
+
             if (response.ok) {
-                localStorage.setItem('credentials', btoa(email + ':' + password))
+                const data = await response.json();
+                localStorage.setItem('token', data.token)
                 onLoginSuccess(true);
             } else {
                 if (response.status === 401) {

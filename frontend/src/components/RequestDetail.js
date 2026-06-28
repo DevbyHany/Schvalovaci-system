@@ -5,11 +5,11 @@ import API_BASE_URL from '../config';
 function RequestDetail({ request, onClose, currentUser, showToast }) {
     const [errorMessage, setErrorMessage] = useState('');
     const handleReject = async () => {
-        const credentials = localStorage.getItem('credentials');
+        const credentials = localStorage.getItem('token');
         const response = await fetch(`${API_BASE_URL}/api/requests/${request.id}/reject`, {
             method: 'PUT',
             headers: {
-                'Authorization': 'Basic ' + credentials,
+                'Authorization': 'Bearer ' + credentials,
                 'Content-Type': 'application/json'
             },
         })
@@ -22,11 +22,11 @@ function RequestDetail({ request, onClose, currentUser, showToast }) {
         }
     }
     const handleApprove = async () => {
-        const credentials = localStorage.getItem('credentials');
+        const credentials = localStorage.getItem('token');
         const response = await fetch(`${API_BASE_URL}/api/requests/${request.id}/approve`, {
             method: 'PUT',
             headers: {
-                'Authorization': 'Basic ' + credentials,
+                'Authorization': 'Bearer ' + credentials,
                 'Content-Type': 'application/json'
             },
         })
