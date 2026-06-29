@@ -5,7 +5,6 @@ function CreateRequest({ onSuccess, onClose, currentUser, showToast }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [errorMessages, setErrorMessages] = useState([]);
-    const mouseDownOnOverlay = useRef (false);
 
     const handleSubmit = async () => {
         console.log(title, description);
@@ -30,23 +29,8 @@ function CreateRequest({ onSuccess, onClose, currentUser, showToast }) {
         }
     }
 
-    const handleOverlayMouseDown = (e) => {
-        mouseDownOnOverlay.current = e.target === e.currentTarget;
-    };
-
-    const handleOverlayMouseUp = (e) => {
-        if (mouseDownOnOverlay.current && e.target === e.currentTarget) {
-            onClose();
-        }
-        mouseDownOnOverlay.current = false;
-    };
-
     return (
-        <div
-            className="modal-overlay"
-            onMouseDown={handleOverlayMouseDown}
-            onMouseUp={handleOverlayMouseUp}
-        >
+        <div className="modal-overlay">
             <div className="modal-card" onClick={(e) => e.stopPropagation()}>
 
                 <div
