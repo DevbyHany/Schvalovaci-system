@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import API_BASE_URL from '../config';
 
 function CreateRequest({ onSuccess, onClose, currentUser, showToast }) {
