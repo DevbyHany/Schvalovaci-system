@@ -1,6 +1,7 @@
 package cz.dominik.ApprovalWorkflow.controller;
 
 import cz.dominik.ApprovalWorkflow.security.JwtUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -19,6 +20,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/auth")
+@Tag(name= "Autentizace", description = "Po zadání správných údajů endpoint vrátí JWT token, kterým se uživatel prokazuje při dalších požadavcích na API.")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
