@@ -113,7 +113,12 @@ Heslo mají všichni stejné kvůli jednoduchosti testování aplikace.
 | Petr    | petr@seznam.cz    | heslo123 | APPROVER |
 | Filip   | filip@seznam.cz   | heslo123 | ADMIN    |
  
-Po kliknutí na **Authorize** ve Swaggeru lze API testovat přímo s těmito účty.
+### Testování přes Swagger
+
+1. Spusť endpoint `POST /api/auth/login` s emailem a heslem některého z účtů výše
+2. Zkopíruj `token` z odpovědi
+3. Klikni na **Authorize** v pravém horním rohu Swaggeru a vlož token (bez nutnosti psát "Bearer", Swagger to doplní automaticky)
+4. Teď můžeš testovat ostatní chráněné endpointy
 
 ---
 
