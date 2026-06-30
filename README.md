@@ -35,7 +35,7 @@ Aplikace digitalizuje proces schvalování žádostí ve firmě. Zaměstnanec po
   
 ### Backend
 - REST API s vrstvenou architekturou (Controller → Service → Repository)
-- Spring Security – HTTP Basic Auth, BCrypt hashování hesel
+- Spring Security – JWT autentizace (stateless, token platí 1 hodinu), BCrypt hashování hesel
 - Validace vstupních dat (@NotBlank, @Email, @Size)
 - Globální zpracování výjimek
 - Role-based přístup k endpointům
