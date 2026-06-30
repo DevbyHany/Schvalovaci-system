@@ -14,16 +14,15 @@ public class OpenApiConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .info(new Info()
-                        .title("Schvalovací systém API")
-                        .description("REST API pro správu schvalovacích požadavků s rolemi USER, APPROVER a ADMIN")
-                        .version("1.0"))
-                .addSecurityItem(new SecurityRequirement().addList("basicAuth"))
+        return new OpenAPI().info(new Info().title("Schvalovací systém API")
+                .description("REST API pro správu schvalovacích požadavků s rolemi USER, APPROVER a ADMIN")
+                .version("1.0")).addSecurityItem(new SecurityRequirement()
+                .addList("bearerAuth"))
                 .components(new Components()
-                        .addSecuritySchemes("basicAuth",
-                                new SecurityScheme()
-                                        .type(SecurityScheme.Type.HTTP)
-                                        .scheme("basic")));
+                        .addSecuritySchemes("bearerAuth", new SecurityScheme()
+                        .type(SecurityScheme.Type.HTTP)
+                        .scheme("bearer")));
+
+
     }
 }
