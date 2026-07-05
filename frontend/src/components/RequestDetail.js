@@ -1,7 +1,6 @@
 import { translateStatus, formatDate } from "../utils";
 import { useState } from "react";
 import API_BASE_URL from '../config';
-import createRequest from "./CreateRequest";
 
 function RequestDetail({ request, onClose, currentUser, showToast }) {
 
