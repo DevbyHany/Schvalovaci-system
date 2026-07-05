@@ -2,6 +2,7 @@ export const translateStatus = (status) => {
     if (status === 'PENDING') return 'Čeká se';
     if (status === 'APPROVED') return 'Schváleno';
     if (status === 'REJECTED') return 'Zamítnuto';
+    if (status === 'CANCELLED') return 'Zrušeno'
     return status;
 };
 

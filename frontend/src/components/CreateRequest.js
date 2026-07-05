@@ -56,7 +56,7 @@ function CreateRequest({ onSuccess, onClose, currentUser, showToast }) {
                     {errorMessages.length > 0 && (
                         <div className="error-message">
                             {errorMessages.map((err, index) => (
-                                <p key={index} style={{ margin: '4px 0' }}>{err}</p>
+                                <p key={index}>{err}</p>
                             ))}
                         </div>
                     )}

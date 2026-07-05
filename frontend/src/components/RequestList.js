@@ -105,6 +105,9 @@ function RequestList({ showToast }) {
                     <button className={`filter-btn rejected ${filter === 'REJECTED' ? 'active' : ''}`} onClick={() => setFilter('REJECTED')}>
                         Zamítnuto <span className="filter-count">{requests.filter(r => r.requestStatus === 'REJECTED').length}</span>
                     </button>
+                    <button className={`filter-btn cancelled ${filter === 'CANCELLED' ? 'active' : ''}`} onClick={() => setFilter('CANCELLED')}>
+                        Zrušeno <span className="filter-count">{requests.filter(r => r.requestStatus === 'CANCELLED').length}</span>
+                    </button>
                 </div>
                 <div className="table-card">
                     {loading ? (

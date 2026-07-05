@@ -2,6 +2,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    table-layout: fixed;
 }
 
 th,
@@ -9,6 +10,12 @@ td {
     text-align: left;
     padding: 12px 16px;
     border-bottom: 1px solid #e0e0e0;
+}
+
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 th {
@@ -31,7 +38,9 @@ tbody tr {
     border-radius: 12px;
     font-size: 13px;
     font-weight: 500;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .status-pending {
@@ -47,6 +56,11 @@ tbody tr {
 .status-rejected {
     background-color: #fce8e6;
     color: #c5221f;
+}
+
+.status-cancelled {
+    background-color: #e3e5e8;
+    color: #5f6368;
 }
 
 .modal-overlay {
@@ -91,6 +105,13 @@ tbody tr {
 
 .modal-body {
     padding: 20px 24px;
+}
+
+.modal-body p {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #374151;
 }
 
 .modal-footer {
@@ -140,6 +161,7 @@ tbody tr {
 .detail-value {
     font-size: 14px;
     color: #374151;
+    overflow-wrap: anywhere;
 }
 
 .inputTitle {
@@ -174,7 +196,7 @@ tbody tr {
 .createButton {
     padding: 8px 16px;
     border-radius: 8px;
-    margin-top: 12px;
+    margin-top: 9px;
     font-size: 13px;
     font-weight: 600;
     border: none;
@@ -217,6 +239,21 @@ tbody tr {
 
 .detailRejectButton:hover {
     background-color: #fee2e2;
+    font-weight: 600;
+}
+
+.detailRejectButtonBack {
+    border: 1px solid #5713f7;
+    border-radius: 8px;
+    color: #5713f7;
+    font-weight: 600;
+    width: 15%;
+}
+
+.detailRejectButtonBack:hover {
+    color: white;
+    background-color: #5713f7;
+    cursor:pointer;
 }
 
 .header {
@@ -226,6 +263,25 @@ tbody tr {
     padding: 20px 24px;
     border-bottom: 1px solid #e0e0e0;
     background-color: white;
+}
+
+th:nth-child(1), td:nth-child(1) {
+    width: 15%;
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 25%;
+}
+th:nth-child(3), td:nth-child(3) {
+    width: 25%;
+}
+
+th:nth-child(4), td:nth-child(4) {
+    width: 25%;
+}
+
+th:nth-child(2), td:nth-child(2) {
+    text-align: center;
 }
 
 .header h2 {
@@ -426,6 +482,10 @@ tbody tr {
     text-align: center;
 }
 
+.error-message p {
+    margin: 4px 0;
+}
+
 .toast {
     position: fixed;
     top: 24px;
@@ -534,6 +594,41 @@ tbody tr {
     color: #c5221f;
 }
 
+.filter-btn.cancelled.active {
+    border-color: #5f6368;
+    background-color: #f1f3f4;
+    color: #5f6368;
+}
+
+.cancel-tooltip-wrap {
+    position: relative;
+    display: inline-block;
+    flex: 1;
+}
+
+.cancel-tooltip-wrap[data-tooltip]:not([data-tooltip=""])::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 6px;
+    background: #374151;
+    color: white;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+}
+
+.cancel-tooltip-wrap:hover[data-tooltip]:not([data-tooltip=""])::after {
+    opacity: 1;
+}
+
+
 .filter-count {
     background-color: rgba(0, 0, 0, 0.07);
     border-radius: 10px;
@@ -580,7 +675,9 @@ tbody tr {
     background: transparent;
     border: 1px solid #dc3545;
     color: #dc3545;
-    padding: 8px 16px;
+    font-weight: 600;
+    padding: 10px;
+    width: 100%;
     border-radius: 6px;
     cursor: pointer;
 }
