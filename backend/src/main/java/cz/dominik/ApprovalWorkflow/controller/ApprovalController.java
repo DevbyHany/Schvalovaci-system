@@ -1,6 +1,7 @@
 package cz.dominik.ApprovalWorkflow.controller;
 
 import cz.dominik.ApprovalWorkflow.dto.ApprovalRequestResponseDTO;
+import cz.dominik.ApprovalWorkflow.dto.CancelRequestDTO;
 import cz.dominik.ApprovalWorkflow.dto.CreateRequestDTO;
 import cz.dominik.ApprovalWorkflow.entity.User;
 import cz.dominik.ApprovalWorkflow.service.ApprovalService;
@@ -81,6 +82,25 @@ public class ApprovalController {
             @AuthenticationPrincipal User user) {
         return approvalService.rejectRequest(user, id);
     }
+
+    @Operation(
+            summary = "Zrušení požadavku",
+            description = "Zruší konkrétní požadavek. Dostupné pouze pro role CREATOR a ADMIN."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Požadavek úspěšně zrušen"),
+            @ApiResponse(responseCode = "401", description = "Nepřihlášený uživatel"),
+            @ApiResponse(responseCode = "403", description = "Nedostatečná oprávnění"),
+            @ApiResponse(responseCode = "404", description = "Požadavek nenalezen")
+    })
+    @PutMapping("/{id}/cancel")
+    public ApprovalRequestResponseDTO cancelRequest(
+            @PathVariable Long id,
+            @AuthenticationPrincipal User user,
+            @RequestBody CancelRequestDTO dto) {
+        return approvalService.cancelRequest(user, id, dto.cancellationReason());
+    }
+
 
     /** Vrátí detail žádosti podle ID. GET /api/requests/{id} */
     @Operation(

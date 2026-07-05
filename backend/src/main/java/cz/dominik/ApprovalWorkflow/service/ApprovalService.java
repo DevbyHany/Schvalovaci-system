@@ -6,12 +6,14 @@ import cz.dominik.ApprovalWorkflow.entity.ApprovalRequest;
 import cz.dominik.ApprovalWorkflow.entity.RequestStatus;
 import cz.dominik.ApprovalWorkflow.entity.Role;
 import cz.dominik.ApprovalWorkflow.entity.User;
+import cz.dominik.ApprovalWorkflow.exception.ForbiddenActionException;
 import cz.dominik.ApprovalWorkflow.exception.InvalidRequestStateException;
 import cz.dominik.ApprovalWorkflow.exception.ResourceNotFoundException;
 import cz.dominik.ApprovalWorkflow.repository.ApprovalRequestRepository;
 import cz.dominik.ApprovalWorkflow.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import javax.management.relation.InvalidRoleValueException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,9 +25,9 @@ import java.util.stream.Collectors;
 @Service
 public class ApprovalService {
 
-    private ApprovalRequestRepository approvalRequestRepository;
+    private final ApprovalRequestRepository approvalRequestRepository;
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public ApprovalService(ApprovalRequestRepository approvalRequestRepository, UserRepository userRepository) {
         this.approvalRequestRepository = approvalRequestRepository;
@@ -50,15 +52,12 @@ public class ApprovalService {
      * @throws InvalidRequestStateException pokud žádost již byla vyřízena
      */
     public ApprovalRequestResponseDTO approveRequest(User approver, Long requestId) {
-        ApprovalRequest request = approvalRequestRepository.findById(requestId)
-                .orElseThrow(() -> new ResourceNotFoundException("Žádost nenalezena"));
+        ApprovalRequest request = approvalRequestRepository.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Žádost nenalezena"));
 
         if (request.getCreator().getId().equals(approver.getId())) {
             throw new InvalidRequestStateException("Nemůžeš schválit vlastní žádost");
-        } else if (request.getRequestStatus().equals(RequestStatus.REJECTED)) {
-            throw new InvalidRequestStateException("Žádost už byla zamítnuta");
-        } else if (request.getRequestStatus().equals(RequestStatus.APPROVED)) {
-            throw new InvalidRequestStateException("Žádost již byla schválena");
+        } else if (!request.getRequestStatus().equals(RequestStatus.PENDING)) {
+            throw new InvalidRequestStateException("S touto žádostí již nelze pracovat");
         }
         request.setApprover(approver);
         request.setRequestStatus(RequestStatus.APPROVED);
@@ -73,15 +72,12 @@ public class ApprovalService {
      * @throws InvalidRequestStateException pokud žádost již byla vyřízena
      */
     public ApprovalRequestResponseDTO rejectRequest(User approver, Long requestId) {
-        ApprovalRequest request = approvalRequestRepository.findById(requestId)
-                .orElseThrow(() -> new ResourceNotFoundException("Žádost nenalezena"));
+        ApprovalRequest request = approvalRequestRepository.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Žádost nenalezena"));
 
         if (request.getCreator().getId().equals(approver.getId())) {
             throw new InvalidRequestStateException("Nemůžeš zamítnout vlastní žádost");
-        } else if (request.getRequestStatus().equals(RequestStatus.REJECTED)) {
-            throw new InvalidRequestStateException("Žádost již byla zamítnuta");
-        } else if (request.getRequestStatus().equals(RequestStatus.APPROVED)) {
-            throw new InvalidRequestStateException("Žádost již byla schválena");
+        } else if (!request.getRequestStatus().equals(RequestStatus.PENDING)) {
+            throw new InvalidRequestStateException("S touto žádostí již nelze pracovat");
         }
         request.setApprover(approver);
         request.setRequestStatus(RequestStatus.REJECTED);
@@ -90,21 +86,47 @@ public class ApprovalService {
     }
 
     /**
+     * Zruší žádost. Zrušit ji smí jen její tvůrce nebo ADMIN.
+     * Žádost musí být ve stavu PENDING.
+     *
+     * @throws ResourceNotFoundException  pokud žádost neexistuje
+     * @throws ForbiddenActionException   pokud rušící není tvůrce ani ADMIN
+     * @throws InvalidRequestStateException pokud žádost není ve stavu PENDING
+     */
+    public ApprovalRequestResponseDTO cancelRequest(User canceler, Long requestId, String cancellationReason) {
+        ApprovalRequest request = approvalRequestRepository.findById(requestId)
+                .orElseThrow(() -> new ResourceNotFoundException("Žádost nenalezena"));
+
+        if (!(canceler.getId().equals(request.getCreator().getId()) || canceler.getRole() == Role.ADMIN)) {
+            throw new ForbiddenActionException("Tuto žádost nemůžeš zrušit");
+        }
+
+        if (!request.getRequestStatus().equals(RequestStatus.PENDING)) {
+            throw new InvalidRequestStateException("S touto žádostí již nelze pracovat");
+        }
+
+        request.setCanceler(canceler);
+        request.setRequestStatus(RequestStatus.CANCELLED);
+        request.setCancellationReason(cancellationReason);
+        request.setUpdatedAt(LocalDateTime.now());
+
+        return toDTO(approvalRequestRepository.save(request));
+    }
+
+    /**
      * Převede entitu ApprovalRequest na DTO pro API odpověď.
      */
     private ApprovalRequestResponseDTO toDTO(ApprovalRequest request) {
-        UserResponseDTO createDTO = new UserResponseDTO(request.getCreator().getId(), request.getCreator().getName(),
-                request.getCreator().getEmail(), request.getCreator().getRole());
+        UserResponseDTO createDTO = new UserResponseDTO(request.getCreator().getId(), request.getCreator().getName(), request.getCreator().getEmail(), request.getCreator().getRole());
 
-        UserResponseDTO approverDTO = request.getApprover() != null
-                ? new UserResponseDTO(request.getApprover().getId(), request.getApprover().getName(), request.getApprover().getEmail(), request.getApprover().getRole())
-                : null;
-        return new ApprovalRequestResponseDTO(approverDTO, createDTO, request.getRequestStatus(), request.getUpdatedAt(), request.getCreatedAt(), request.getDescription(), request.getTitle(), request.getId());
+        UserResponseDTO approverDTO = request.getApprover() != null ? new UserResponseDTO(request.getApprover().getId(), request.getApprover().getName(), request.getApprover().getEmail(), request.getApprover().getRole()) : null;
+
+        UserResponseDTO cancelerDTO = request.getCanceler() != null ? new UserResponseDTO(request.getCanceler().getId(), request.getCanceler().getName(), request.getCanceler().getEmail(), request.getCanceler().getRole()) : null;
+        return new ApprovalRequestResponseDTO(approverDTO, createDTO, request.getRequestStatus(), request.getUpdatedAt(), request.getCreatedAt(), request.getDescription(), request.getTitle(), request.getId(), request.getCancellationReason(), cancelerDTO);
     }
 
     public ApprovalRequestResponseDTO getRequestById(Long requestId) {
-        return toDTO(approvalRequestRepository.findById(requestId)
-                .orElseThrow(() -> new ResourceNotFoundException("Žádost nenalezena")));
+        return toDTO(approvalRequestRepository.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Žádost nenalezena")));
     }
 
     /**
@@ -113,15 +135,9 @@ public class ApprovalService {
      */
     public List<ApprovalRequestResponseDTO> getAllRequests(User user) {
         if (user.getRole() == Role.APPROVER || user.getRole() == Role.ADMIN) {
-            return approvalRequestRepository.findAll()
-                    .stream()
-                    .map(this::toDTO)
-                    .collect(Collectors.toList());
+            return approvalRequestRepository.findAll().stream().map(this::toDTO).collect(Collectors.toList());
         } else {
-            return approvalRequestRepository.findByCreator(user)
-                    .stream()
-                    .map(this::toDTO)
-                    .collect(Collectors.toList());
+            return approvalRequestRepository.findByCreator(user).stream().map(this::toDTO).collect(Collectors.toList());
         }
     }
 }

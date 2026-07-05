@@ -25,11 +25,16 @@ public class ApprovalRequestResponseDTO {
     @Schema(example = "PENDING")
     private RequestStatus requestStatus;
 
+    @Schema(example = "Žádost byla zrušena z důvodu nedostatku dovolené")
+    private String cancellationReason;
+
     private UserResponseDTO creator;
 
     private UserResponseDTO approver;
 
-    public ApprovalRequestResponseDTO(UserResponseDTO approver, UserResponseDTO creator, RequestStatus requestStatus, LocalDateTime updatedAt, LocalDateTime createdAt, String description, String title, Long id) {
+    private UserResponseDTO canceler;
+
+    public ApprovalRequestResponseDTO(UserResponseDTO approver, UserResponseDTO creator, RequestStatus requestStatus, LocalDateTime updatedAt, LocalDateTime createdAt, String description, String title, Long id, String cancellationReason, UserResponseDTO canceler) {
         this.approver = approver;
         this.creator = creator;
         this.requestStatus = requestStatus;
@@ -38,6 +43,8 @@ public class ApprovalRequestResponseDTO {
         this.description = description;
         this.title = title;
         this.id = id;
+        this.canceler = canceler;
+        this.cancellationReason = cancellationReason;
     }
 
     public Long getId() {
@@ -102,5 +109,21 @@ public class ApprovalRequestResponseDTO {
 
     public void setApprover(UserResponseDTO approver) {
         this.approver = approver;
+    }
+
+    public String getCancellationReason() {
+        return cancellationReason;
+    }
+
+    public void setCancellationReason(String cancellationReason) {
+        this.cancellationReason = cancellationReason;
+    }
+
+    public UserResponseDTO getCanceler() {
+        return canceler;
+    }
+
+    public void setCanceler(UserResponseDTO canceler) {
+        this.canceler = canceler;
     }
 }

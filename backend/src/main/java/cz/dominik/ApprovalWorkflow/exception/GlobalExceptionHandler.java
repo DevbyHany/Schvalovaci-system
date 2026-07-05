@@ -37,4 +37,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleResourceNotFoundException(ResourceNotFoundException rnf) {
         return ResponseEntity.status(404).body(Map.of("message", rnf.getMessage()));
     }
+
+    @ExceptionHandler(ForbiddenActionException.class)
+    public ResponseEntity<Map<String, String>> handleForbiddenException(ForbiddenActionException fe){
+        return ResponseEntity.status(403).body(Map.of("message", fe.getMessage()));
+    }
+
 }

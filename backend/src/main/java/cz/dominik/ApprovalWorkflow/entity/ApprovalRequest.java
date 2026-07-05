@@ -20,6 +20,11 @@ public class ApprovalRequest {
     @ManyToOne(optional = true)
     private User approver;
 
+    @ManyToOne(optional = true)
+    private User canceler;
+
+    private String cancellationReason;
+
     public ApprovalRequest(User creator, String title, String description) {
         this.title = title;
         this.description = description;
@@ -85,6 +90,22 @@ public class ApprovalRequest {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public User getCanceler() {
+        return canceler;
+    }
+
+    public void setCanceler(User canceler) {
+        this.canceler = canceler;
+    }
+
+    public String getCancellationReason() {
+        return cancellationReason;
+    }
+
+    public void setCancellationReason(String cancellationReason) {
+        this.cancellationReason = cancellationReason;
     }
 
     public Long getId() {
