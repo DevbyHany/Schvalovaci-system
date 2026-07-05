@@ -575,3 +575,14 @@ tbody tr {
         transform: rotate(360deg);
     }
 }
+
+.detailCancelButton {
+    background: transparent;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.detailCancelButton:hover { background: #dc3545; color: white; }
+.detailCancelButton:disabled { opacity: 0.4; cursor: not-allowed; }
