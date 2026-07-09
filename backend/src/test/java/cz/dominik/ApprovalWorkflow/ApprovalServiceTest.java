@@ -1,6 +1,7 @@
 package cz.dominik.ApprovalWorkflow;
 
 import cz.dominik.ApprovalWorkflow.entity.*;
+import cz.dominik.ApprovalWorkflow.exception.ForbiddenActionException;
 import cz.dominik.ApprovalWorkflow.exception.InvalidRequestStateException;
 import cz.dominik.ApprovalWorkflow.exception.ResourceNotFoundException;
 import cz.dominik.ApprovalWorkflow.repository.ApprovalRequestRepository;
@@ -33,6 +34,7 @@ class ApprovalServiceTest {
 
     private User creator;
     private User approver;
+    private User admin;
     private ApprovalRequest pendingRequest;
 
     @BeforeEach
@@ -48,6 +50,13 @@ class ApprovalServiceTest {
         approver.setName("Petr");
         approver.setEmail("petr@seznam.cz");
         approver.setRole(Role.APPROVER);
+
+        admin = new User();
+        admin.setId(3L);
+        admin.setName("Filip");
+        admin.setEmail("filip@seznam.cz");
+        admin.setRole(Role.ADMIN);
+
 
         pendingRequest = new ApprovalRequest(creator, "Test žádost", "Popis žádosti");
         pendingRequest.setId(1L);
@@ -116,5 +125,50 @@ class ApprovalServiceTest {
 
         assertThrows(ResourceNotFoundException.class,
                 () -> approvalService.getRequestById(99L));
+    }
+
+    @Test
+    void cancelRequest_shouldCancelSuccessfully_whenCreatorCancelsOwn() {
+        when(approvalRequestRepository.findById(1L)).thenReturn(Optional.of(pendingRequest));
+        when(approvalRequestRepository.save(any())).thenReturn(pendingRequest);
+
+        var result = approvalService.cancelRequest(creator, 1L, "Už to nepotřebuji");
+
+        assertEquals(RequestStatus.CANCELLED, result.getRequestStatus());
+    }
+
+    @Test
+    void cancelRequest_shouldCancelSuccessfully_whenCancelerIsAdmin() {
+        when(approvalRequestRepository.findById(1L)).thenReturn(Optional.of(pendingRequest));
+        when(approvalRequestRepository.save(any())).thenReturn(pendingRequest);
+
+        var result = approvalService.cancelRequest(admin, 1L, "Neplatná žádost");
+
+        assertEquals(RequestStatus.CANCELLED, result.getRequestStatus());
+    }
+
+    @Test
+    void cancelRequest_shouldThrow_whenUserCancelsSomeoneElsesRequest() {
+        when(approvalRequestRepository.findById(1L)).thenReturn(Optional.of(pendingRequest));
+
+        assertThrows(ForbiddenActionException.class,
+                () -> approvalService.cancelRequest(approver, 1L, "Cizí žádost"));
+    }
+
+    @Test
+    void cancelRequest_shouldThrow_whenAlreadyApproved() {
+        pendingRequest.setRequestStatus(RequestStatus.APPROVED);
+        when(approvalRequestRepository.findById(1L)).thenReturn(Optional.of(pendingRequest));
+
+        assertThrows(InvalidRequestStateException.class,
+                () -> approvalService.cancelRequest(creator, 1L, "Zkouším zrušit schválenou žádost"));
+    }
+
+    @Test
+    void cancelRequest_shouldThrow_whenNotFound() {
+        when(approvalRequestRepository.findById(99L)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class,
+                () -> approvalService.cancelRequest(creator,99L, "Neexistující"));
     }
 }
