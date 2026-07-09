@@ -20,8 +20,9 @@ Aplikace digitalizuje proces schvalování žádostí ve firmě. Zaměstnanec po
 ### Uživatel (USER)
 - Registrace a přihlášení
 - Vytvoření nové žádosti s názvem a popisem
+- Zrušení vlastní čekající žádosti (s uvedením důvodu)
 - Zobrazení pouze vlastních žádostí
-- Filtrování žádostí podle statusu
+- Filtrování žádostí podle statusu (čeká se, schváleno, zamítnuto a zrušeno)
   
 ### Schvalovatel (APPROVER)
 - Zobrazení všech žádostí v systému
@@ -31,6 +32,7 @@ Aplikace digitalizuje proces schvalování žádostí ve firmě. Zaměstnanec po
 ### Administrátor (ADMIN)
 - Zobrazení všech žádostí
 - Schválení nebo zamítnutí žádostí
+- Zrušení jakékoliv žádosti
 - Nemůže vytvářet žádosti
   
 ### Backend
@@ -41,6 +43,7 @@ Aplikace digitalizuje proces schvalování žádostí ve firmě. Zaměstnanec po
 - Role-based přístup k endpointům
 - MySQL databáze
 - Interaktivní API dokumentace (Swagger / OpenAPI)
+- Health endpoint (/api/health) pro monitoring a keep-alive
 
 ---
  
