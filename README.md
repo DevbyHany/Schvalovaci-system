@@ -43,7 +43,7 @@ Aplikace digitalizuje proces schvalování žádostí ve firmě. Zaměstnanec po
 - Role-based přístup k endpointům
 - MySQL databáze
 - Interaktivní API dokumentace (Swagger / OpenAPI)
-- Health endpoint (/api/health) pro monitoring a keep-alive
+- Health endpoint (/api/health) s kontrolou databáze – využit pro keep-alive (cron-job.org pinguje každých 10 minut, aby backend i databáze na Railway nešly do spánku)
 
 ---
  
@@ -161,3 +161,8 @@ Testované scénáře:
 - Úspěšné zamítnutí žádosti
 - Zamítnutí již zamítnuté žádosti
 - Vyhození výjimky při nenalezení žádosti
+- Úspěšné zrušení žádosti tvůrcem
+- Úspěšné zrušení žádosti administrátorem
+- Zamítnutí zrušení cizí žádosti (bez oprávnění)
+- Zamítnutí zrušení již vyřízené žádosti
+- Testy běží proti in-memory H2 databázi (profil `test`), nezávisle na produkční MySQL
