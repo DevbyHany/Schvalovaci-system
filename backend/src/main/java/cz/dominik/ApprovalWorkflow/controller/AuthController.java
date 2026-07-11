@@ -1,13 +1,17 @@
 package cz.dominik.ApprovalWorkflow.controller;
 
 import cz.dominik.ApprovalWorkflow.security.JwtUtil;
+import cz.dominik.ApprovalWorkflow.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
@@ -17,35 +21,37 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/auth")
-@Tag(name= "Autentizace", description = "Po zadání správných údajů endpoint vrátí JWT token, kterým se uživatel prokazuje při dalších požadavcích na API.")
+@Tag(name = "Autentizace", description = "Po zadání správných údajů endpoint vrátí JWT token, kterým se uživatel prokazuje při dalších požadavcích na API.")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    private final UserService userService;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserService userService) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
+        this.userService = userService;
     }
 
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         try {
-            UsernamePasswordAuthenticationToken authToken =
-                    new UsernamePasswordAuthenticationToken(request.email(), request.password());
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(request.email(), request.password());
 
             var authentication = authenticationManager.authenticate(authToken);
-
+            userService.updateLastLogin(request.email());
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String token = jwtUtil.generateToken(userDetails);
 
             return ResponseEntity.ok(Map.of("token", token));
-        } catch (BadCredentialsException e){
+        } catch (BadCredentialsException e) {
             return ResponseEntity.status(401).body(Map.of("message", "Nesprávný email nebo heslo"));
         }
 
     }
 
-    public record LoginRequest(String email, String password) {}
+    public record LoginRequest(String email, String password) {
+    }
 }

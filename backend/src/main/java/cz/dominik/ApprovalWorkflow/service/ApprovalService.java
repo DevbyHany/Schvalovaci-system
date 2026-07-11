@@ -13,7 +13,6 @@ import cz.dominik.ApprovalWorkflow.repository.ApprovalRequestRepository;
 import cz.dominik.ApprovalWorkflow.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import javax.management.relation.InvalidRoleValueException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -140,4 +139,6 @@ public class ApprovalService {
             return approvalRequestRepository.findByCreator(user).stream().map(this::toDTO).collect(Collectors.toList());
         }
     }
+
+
 }

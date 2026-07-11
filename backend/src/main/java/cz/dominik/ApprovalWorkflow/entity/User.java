@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,7 +22,8 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String email, Role role, String password) {
+    public User(String name, String email, Role role, String password, LocalDateTime lastLoginAt) {
+        this.lastLoginAt = lastLoginAt;
         this.name = name;
         this.email = email;
         this.role = role;
@@ -42,6 +44,9 @@ public class User implements UserDetails {
     private Role role;
 
     private String password;
+
+    @Column(name = "last_login_at")
+    private LocalDateTime lastLoginAt;
 
     public Role getRole() {
         return role;
@@ -77,6 +82,14 @@ public class User implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public LocalDateTime getLastLoginAt() {
+        return lastLoginAt;
+    }
+
+    public void setLastLoginAt(LocalDateTime lastLoginAt) {
+        this.lastLoginAt = lastLoginAt;
     }
 
     @Override

@@ -5,9 +5,12 @@ import cz.dominik.ApprovalWorkflow.dto.UserResponseDTO;
 import cz.dominik.ApprovalWorkflow.entity.Role;
 import cz.dominik.ApprovalWorkflow.entity.User;
 import cz.dominik.ApprovalWorkflow.exception.InvalidRequestStateException;
+import cz.dominik.ApprovalWorkflow.exception.ResourceNotFoundException;
 import cz.dominik.ApprovalWorkflow.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 /**
  * Servisní vrstva pro správu uživatelů.
@@ -42,5 +45,17 @@ public class UserService {
 
         User saved = userRepository.save(user);
         return new UserResponseDTO(saved.getId(), saved.getName(), saved.getEmail(), saved.getRole());
+    }
+
+    /**
+     * Aktualizuje čas posledního přihlášení uživatele.
+     *
+     * @throws ResourceNotFoundException pokud uživatel s daným emailem neexistuje
+     */
+    public void updateLastLogin(String email){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Uživatel nenalezen"));
+        user.setLastLoginAt(LocalDateTime.now());
+        userRepository.save(user);
     }
 }
