@@ -167,3 +167,4 @@ Testované scénáře:
 - Zamítnutí zrušení cizí žádosti (bez oprávnění)
 - Zamítnutí zrušení již vyřízené žádosti
 - Testy běží proti in-memory H2 databázi (profil `test`), nezávisle na produkční MySQL
+- Automatické spouštění testů při každém pushi (GitHub Actions CI)
